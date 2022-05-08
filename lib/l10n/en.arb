@@ -1,0 +1,62 @@
+{
+  "@@locale":"en",
+  "memoTitle": "Markdown memo",
+  "memoTabEditor": "Editor",
+  "memoTabPreview": "Preview",
+  "memoTitleName": "Title",
+  "memoTitleHint": "Enter a title",
+  "memoContentName": "Content",
+  "memoContentHint": "Enter a content",
+  "memoCardCreatedAt": "Created at: {createdAt}",
+  "@memoCardCreatedAt": {
+    "placeholders":{
+      "createdAt":{
+        "type": "DateTime",
+        "format": "yMd",
+        "example" : "2022/02/03"
+      }
+    }
+  },
+  "memoCardLastModifiedAt": "Last modified at: {lastModifiedAt}",
+  "@memoCardLastModifiedAt": {
+    "placeholders":{
+      "lastModifiedAt":{
+        "type": "DateTime",
+        "format": "yMd",
+        "example" : "2022/02/03"
+      }
+    }
+  },
+  "memoCardLastOpenedAt": "Last opened at: {lastOpenedAt}",
+  "@memoCardLastOpenedAt": {
+    "placeholders":{
+      "lastOpenedAt":{
+        "type": "DateTime",
+        "format": "yMd",
+        "example" : "2022/02/03"
+      }
+    }
+  },
+  "memoCardWillDeleteDays": "will be deleted at {willDeleteDays} days later",
+  "@memoCardWillDeleteDays": {
+    "placeholders":{
+      "willDeleteDays":{
+        "type": "int",
+        "example" : "30"
+      }
+    }
+  },
+  "memoDeletedListNoItem": "No deleted memo.",
+  "memoDeletedListActionRestore": "Restore",
+  "memoDeletedListActionDeletePermanent": "Delete permanently",
+  "memoListNoItem": "No memo.",
+  "memoListActionOpen": "Open",
+  "memoListActionDelete": "Delete",
+  "memoListLoading": "Loading…",
+  "memoListFailedToLoad": "Failed to memo list.",
+  "memoListTitle": "Markdown memo list",
+  "memoListTabList": "Activated",
+  "memoListTabDeletedList": "Deleted",
+  "memoSampleTitle": "Sample memo",
+  "memoSampleContent": "# Heading 1\n## Heading 2\nTest input. You can write memo with Markdown format(GFM).\n\nYou also able to write multiline with  trailing two spaces."
+}
