@@ -8,14 +8,45 @@ class Header extends StatelessWidget {
   final String text;
   final String content;
   final int level;
+  final int occurrence;
   final Function(String headerId) onCopyRequested;
   const Header({
     Key? key,
     required this.text,
     required this.level,
+    required this.occurrence,
     required this.content,
     required this.onCopyRequested
   }) : super(key: key);
+
+  String? _extractCopyText() {
+    final start = (() {
+      int currentStart = 0;
+      int currentOccurrence = 0;
+      while(currentStart >= 0 && currentOccurrence <= occurrence) {
+        currentStart = content.indexOf(RegExp("\n{0,}#{$level} $text"), currentStart);
+        if (currentOccurrence == occurrence) {
+          break;
+        }
+        currentOccurrence++;
+        currentStart += level;
+      }
+      return currentStart;
+    })();
+    final end = content.indexOf(RegExp("(\n{1,})#{1,$level} "), start + level);
+    print("$level, $start, $end, $text, $occurrence");
+    if (start >= 0) {
+      final text = (() {
+        if (end >= 0) {
+          return content.substring(start, end);
+        } else {
+          return content.substring(start);
+        }
+      })();
+      return text.replaceAll(RegExp("^\n{0,}"), "");
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +76,9 @@ class Header extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            // # FIXME(Niccari): should not be processed on widgets
-            // # FIXME(Niccari): same header text won't processed.
-            final start = content.indexOf(RegExp("\n{0,}#{$level} $text"));
-            final end = content.indexOf(RegExp("(\n{1,})#{1,$level} "), start + level);
-            if (start >= 0) {
-              final text = (() {
-                if (end >= 0) {
-                  return content.substring(start, end - 1);
-                } else {
-                  return content.substring(start);
-                }
-              })();
-              onCopyRequested(text.replaceAll(RegExp("^\n{0,}"), ""));
+            final copyText = _extractCopyText();
+            if (copyText != null) {
+              onCopyRequested(copyText);
             }
           },
           icon: const Icon(Icons.copy)
@@ -68,21 +89,31 @@ class Header extends StatelessWidget {
 }
 
 class CustomHeaderBuilder extends MarkdownElementBuilder {
+  final int Function(String tag, String text) onHeaderFound;
   final Function(String) onCopyRequested;
   final String content;
+  int occurrence = 0;
   int level = 1;
-  List<md.Node>? children;
 
   CustomHeaderBuilder({
     required this.content,
+    required this.onHeaderFound,
     required this.onCopyRequested
   });
+
+  @override
+  void visitElementBefore(md.Element element) {
+    super.visitElementBefore(element);
+
+    occurrence = onHeaderFound(element.tag, element.textContent);
+  }
 
   @override
   Widget visitText(md.Text text, TextStyle? preferredStyle) {
     return Header(
         text: text.text,
         content: content,
+        occurrence: occurrence,
         level: level,
         onCopyRequested: onCopyRequested
     );
@@ -90,8 +121,9 @@ class CustomHeaderBuilder extends MarkdownElementBuilder {
 }
 
 class CustomHeader1Builder extends CustomHeaderBuilder {
-  CustomHeader1Builder({onCopyRequested, content}): super(
+  CustomHeader1Builder({onCopyRequested, onHeaderFound, content}): super(
     content: content,
+    onHeaderFound: onHeaderFound,
     onCopyRequested: onCopyRequested,
   ) {
     level = 1;
@@ -99,8 +131,9 @@ class CustomHeader1Builder extends CustomHeaderBuilder {
 }
 
 class CustomHeader2Builder extends CustomHeaderBuilder {
-  CustomHeader2Builder({onCopyRequested, content}): super(
+  CustomHeader2Builder({onCopyRequested, onHeaderFound, content}): super(
     content: content,
+    onHeaderFound: onHeaderFound,
     onCopyRequested: onCopyRequested,
   ) {
     level = 2;
@@ -108,32 +141,36 @@ class CustomHeader2Builder extends CustomHeaderBuilder {
 }
 
 class CustomHeader3Builder extends CustomHeaderBuilder {
-  CustomHeader3Builder({onCopyRequested, content}): super(
+  CustomHeader3Builder({onCopyRequested, onHeaderFound, content}): super(
     content: content,
+    onHeaderFound: onHeaderFound,
     onCopyRequested: onCopyRequested,
   ) {
     level = 3;
   }
 }
 class CustomHeader4Builder extends CustomHeaderBuilder {
-  CustomHeader4Builder({onCopyRequested, content}): super(
+  CustomHeader4Builder({onCopyRequested, onHeaderFound, content}): super(
     content: content,
+    onHeaderFound: onHeaderFound,
     onCopyRequested: onCopyRequested,
   ) {
     level = 4;
   }
 }
 class CustomHeader5Builder extends CustomHeaderBuilder {
-  CustomHeader5Builder({onCopyRequested, content}): super(
+  CustomHeader5Builder({onCopyRequested, onHeaderFound, content}): super(
     content: content,
+    onHeaderFound: onHeaderFound,
     onCopyRequested: onCopyRequested,
   )  {
     level = 5;
   }
 }
 class CustomHeader6Builder extends CustomHeaderBuilder {
-  CustomHeader6Builder({onCopyRequested, content}): super(
+  CustomHeader6Builder({onCopyRequested, onHeaderFound, content}): super(
     content: content,
+    onHeaderFound: onHeaderFound,
     onCopyRequested: onCopyRequested,
   ) {
     level = 6;

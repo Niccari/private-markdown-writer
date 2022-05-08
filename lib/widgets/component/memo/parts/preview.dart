@@ -2,10 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import 'markdown_builder/header.dart';
+import '../../../container/memo/parts/markdown_body.dart';
 
 class PreviewWidget extends StatelessWidget {
   const PreviewWidget({
@@ -29,6 +27,7 @@ class PreviewWidget extends StatelessWidget {
         fontStyle: FontStyle.italic,
         fontSize: 24
     );
+
     void _onCopyRequested (String text) {
       onCopyRequested(text);
       final textSummary = text.substring(0, min(16, text.length)).replaceAll("\n", "");
@@ -36,6 +35,10 @@ class PreviewWidget extends StatelessWidget {
         content: Text("$notifyMemoContentCopied ($textSummary...)"),
         duration: const Duration(seconds: 2),
       ));
+    }
+
+    if (title == null || content == null) {
+      return Text(memoListLoading);
     }
     return SingleChildScrollView(
       child: Padding(
@@ -48,23 +51,10 @@ class PreviewWidget extends StatelessWidget {
               style: titleTextStyle,
             ),
             const Padding(padding: internalPaddingInset),
-            MarkdownBody(
-              data: content ?? memoListLoading,
-              onTapLink: (_, url, __){
-                if (url != null) {
-                  final uri = Uri.parse(url);
-                  launchUrl(uri);
-                }
-              },
-              builders: {
-                'h1': CustomHeader1Builder(content: content, onCopyRequested: _onCopyRequested),
-                'h2': CustomHeader2Builder(content: content, onCopyRequested: _onCopyRequested),
-                'h3': CustomHeader3Builder(content: content, onCopyRequested: _onCopyRequested),
-                'h4': CustomHeader4Builder(content: content, onCopyRequested: _onCopyRequested),
-                'h5': CustomHeader5Builder(content: content, onCopyRequested: _onCopyRequested),
-                'h6': CustomHeader6Builder(content: content, onCopyRequested: _onCopyRequested)
-              },
-            )
+            MarkdownBodyHeaderCopiableContainer(
+              content: content ?? memoListLoading,
+              onCopyRequested: _onCopyRequested,
+            ),
           ],
         )
       )
