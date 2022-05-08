@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:private_markdown_writer/widgets/component/memo/parts/preview.dart';
 
@@ -9,12 +10,18 @@ class PreviewWidgetContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _onCopyRequested(String text) {
+      final data = ClipboardData(text: text);
+      Clipboard.setData(data);
+    }
+
     return Consumer(
         builder: (context, ref, _) {
           final memo = ref.watch(memoProvider);
           return PreviewWidget(
-            title: memo?.title ?? "読込中...",
-            content: memo?.content ?? "読込中..."
+            title: memo?.title,
+            content: memo?.content,
+            onCopyRequested: _onCopyRequested
           );
         }
     );
