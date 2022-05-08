@@ -32,7 +32,7 @@ Notes are stored locally only and can be managed without uploading to an externa
 ## Release
 ### web
 1. Build app.
-`flutter build web --web-renderer html`
+`flutter build web --web-renderer html (--base-href /private-markdown-writer/)
 
 2. Deploy `build/web` to your web service.
 
