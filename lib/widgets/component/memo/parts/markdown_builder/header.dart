@@ -35,14 +35,12 @@ class Header extends StatelessWidget {
       key: Key(headerId),
       children: [
         Expanded(
-          child: SelectableText.rich(
-            TextSpan(
-              text: text,
-              style: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold
-               )
-            ),
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold
+            )
           ),
         ),
         IconButton(
