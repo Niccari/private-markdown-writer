@@ -24,5 +24,6 @@
   "memoListTabList": "メモ一覧",
   "memoListTabDeletedList": "削除済みメモ一覧",
   "notifyMemoContentCopied": "見出し内のメモをコピーしました！",
-  "notifyMemoStored": "メモを保存しました！"
+  "notifyMemoStored": "メモを保存しました！",
+  "licenseNavigator": "ライセンス情報を見る"
 }

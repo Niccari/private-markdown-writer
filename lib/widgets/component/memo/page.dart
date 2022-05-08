@@ -21,7 +21,7 @@ class MemoPage extends StatelessWidget {
     final memoTabEditor = AppLocalizations.of(context)?.memoTabEditor ?? "";
     final memoTabPreview = AppLocalizations.of(context)?.memoTabPreview ?? "";
     final notifyMemoStored = AppLocalizations.of(context)?.notifyMemoStored ?? "";
-
+    final licenseNavigator = AppLocalizations.of(context)?.licenseNavigator ?? "";
     const fabPaddingInset = EdgeInsets.all(8);
 
     void _storeMemo() {
@@ -67,7 +67,7 @@ class MemoPage extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: TextButton(
-          child: const Text("ライセンス情報"),
+          child: Text(licenseNavigator),
           onPressed: () {
             showLicensePage(context: context);
           },

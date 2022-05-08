@@ -61,5 +61,6 @@
   "memoSampleTitle": "Sample memo",
   "memoSampleContent": "# Heading 1\n## Heading 2\nTest input. You can write memo with Markdown format(GFM).\n\nYou also able to write multiline with  trailing two spaces.",
   "notifyMemoContentCopied": "Copied the memo in the heading!",
-  "notifyMemoStored": "The memo has been saved!"
+  "notifyMemoStored": "The memo has been saved!",
+  "licenseNavigator": "View license information"
 }
