@@ -55,6 +55,12 @@ class MemoPage extends StatelessWidget {
             )
           ],
         ),
+        bottomNavigationBar: TextButton(
+          child: const Text("ライセンス情報"),
+          onPressed: () {
+            showLicensePage(context: context);
+          },
+        )
       ),
     );
   }
