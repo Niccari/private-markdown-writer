@@ -34,7 +34,6 @@ class Header extends StatelessWidget {
       return currentStart;
     })();
     final end = content.indexOf(RegExp("(\n{1,})#{1,$level} "), start + level);
-    print("$level, $start, $end, $text, $occurrence");
     if (start >= 0) {
       final text = (() {
         if (end >= 0) {
@@ -62,18 +61,23 @@ class Header extends StatelessWidget {
         default: return 12.0;
       }
     })();
+    const copyButtonPaddingInset = EdgeInsets.all(16);
     return Row(
       key: Key(headerId),
       children: [
-        Expanded(
-          child: Text(
+        Flexible(child:
+          Text(
             text,
             style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold
-            )
-          ),
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold
+            ),
+            maxLines: 1,
+            softWrap: false,
+            overflow: TextOverflow.clip,
+          )
         ),
+        const Padding(padding: copyButtonPaddingInset),
         IconButton(
           onPressed: () {
             final copyText = _extractCopyText();
