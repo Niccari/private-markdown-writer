@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         Locale('ja', ''),
         Locale('en', ''),
       ],
-      title: 'Markdown preview Demo',
+      title: AppLocalizations.of(context)?.appTitle ?? "",
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.deepOrange,

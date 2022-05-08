@@ -1,5 +1,6 @@
 {
   "@@locale":"en",
+  "appTitle": "Private Markdown Memo",
   "memoTitle": "Markdown memo",
   "memoTabEditor": "Editor",
   "memoTabPreview": "Preview",

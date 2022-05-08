@@ -1,5 +1,6 @@
 {
   "@@locale": "ja",
+  "appTitle": "個人用Markdownメモ",
   "memoTitle": "Markdownメモ",
   "memoTabEditor": "編集",
   "memoTabPreview": "プレビュー",
