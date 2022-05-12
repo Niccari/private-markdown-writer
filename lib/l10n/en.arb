@@ -18,13 +18,47 @@
       }
     }
   },
+  "monthsBefore": "{months} months ago",
+  "@monthsBefore": {
+    "placeholders":{
+      "months":{
+        "type": "int",
+        "example" : "5"
+      }
+    }
+  },
+  "daysBefore": "{days} days ago",
+  "@daysBefore": {
+    "placeholders":{
+      "days":{
+        "type": "int",
+        "example" : "10"
+      }
+    }
+  },
+  "hoursBefore": "{hours} hours ago",
+  "@hoursBefore": {
+    "placeholders":{
+      "hours":{
+        "type": "int",
+        "example" : "12"
+      }
+    }
+  },
+  "minutesBefore": "{minutes} minutes ago",
+  "@minutesBefore": {
+    "placeholders":{
+      "minutes":{
+        "type": "int",
+        "example" : "5"
+      }
+    }
+  },
   "memoCardLastModifiedAt": "Last modified at: {lastModifiedAt}",
   "@memoCardLastModifiedAt": {
     "placeholders":{
       "lastModifiedAt":{
-        "type": "DateTime",
-        "format": "yMd",
-        "example" : "2022/02/03"
+        "type": "String"
       }
     }
   },
@@ -32,9 +66,7 @@
   "@memoCardLastOpenedAt": {
     "placeholders":{
       "lastOpenedAt":{
-        "type": "DateTime",
-        "format": "yMd",
-        "example" : "2022/02/03"
+        "type": "String"
       }
     }
   },

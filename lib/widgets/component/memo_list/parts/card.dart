@@ -40,10 +40,23 @@ class MemoListCardPage extends StatelessWidget {
       }
       return willDeleteAt.difference(DateTime.now()).inDays;
     })();
+    String toDifferenceDateString(DateTime dateTime) {
+      final diff = DateTime.now().difference(dateTime);
+      if (diff.inDays > 30) {
+        return AppLocalizations.of(context)?.monthsBefore(diff.inDays ~/ 30) ?? "";
+      } else if (diff.inDays > 0) {
+        return AppLocalizations.of(context)?.daysBefore(diff.inDays) ?? "";
+      } else if (diff.inHours > 0) {
+        return AppLocalizations.of(context)?.hoursBefore(diff.inHours) ?? "";
+      }
+      return AppLocalizations.of(context)?.minutesBefore(diff.inMinutes) ?? "";
+    }
 
     final memoCardCreatedAt = AppLocalizations.of(context)?.memoCardCreatedAt(memo.createdAt) ?? "";
-    final memoCardLastModifiedAt = AppLocalizations.of(context)?.memoCardLastModifiedAt(memo.lastModifiedAt) ?? "";
-    final memoCardLastOpenedAt = AppLocalizations.of(context)?.memoCardLastOpenedAt(memo.lastOpenedAt) ?? "";
+    final memoCardLastModifiedAt = AppLocalizations.of(context)?.memoCardLastModifiedAt(
+        toDifferenceDateString(memo.lastModifiedAt)) ?? "";
+    final memoCardLastOpenedAt = AppLocalizations.of(context)?.memoCardLastOpenedAt(
+        toDifferenceDateString(memo.lastOpenedAt)) ?? "";
     final memoCardWillDeleteDays = AppLocalizations.of(context)?.memoCardWillDeleteDays(willDeleteDays ?? -1) ?? "";
 
     const cardTitleTextStyle = TextStyle(
