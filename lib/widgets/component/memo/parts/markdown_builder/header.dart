@@ -21,30 +21,18 @@ class Header extends StatelessWidget {
 
   String? _extractCopyText() {
     final start = (() {
-      int currentStart = 0;
-      int currentOccurrence = 0;
-      while(currentStart >= 0 && currentOccurrence <= occurrence) {
-        currentStart = content.indexOf(RegExp("\n{0,}#{$level} $text"), currentStart);
-        if (currentOccurrence == occurrence) {
-          break;
-        }
-        currentOccurrence++;
-        currentStart += level;
+      Iterable<Match> matches = RegExp("\n{0,}#{1,6} ").allMatches(content);
+      if (matches.isEmpty) {
+        return -1;
       }
-      return currentStart;
+      return matches.toList()[occurrence].start;
     })();
-    final end = content.indexOf(RegExp("(\n{1,})#{1,$level} "), start + level);
-    if (start >= 0) {
-      final text = (() {
-        if (end >= 0) {
-          return content.substring(start, end);
-        } else {
-          return content.substring(start);
-        }
-      })();
-      return text.replaceAll(RegExp("^\n{0,}"), "");
+    if (start < 0) {
+      return null;
     }
-    return null;
+    final end = content.indexOf(RegExp("(\n{1,})#{1,$level} "), start + level);
+    final text = content.substring(start, end >= 0 ? end : null);
+    return text.replaceAll(RegExp("^\n{0,}"), "");
   }
 
   @override

@@ -7,7 +7,7 @@ import '../../../component/memo/parts/markdown_builder/header.dart';
 class MarkdownBodyHeaderCopiableContainer extends StatelessWidget {
   final String content;
   final Function(String) onCopyRequested;
-  final List<dynamic> _headers = [];
+  int headerIndex = 0;
 
   MarkdownBodyHeaderCopiableContainer({
     Key? key,
@@ -16,16 +16,7 @@ class MarkdownBodyHeaderCopiableContainer extends StatelessWidget {
   }) : super(key: key);
 
   int add(String tag, String textContent) {
-    final occurrence = _headers.where(
-            (h) => h["tag"] == tag
-            && h["text"] == textContent).length;
-    _headers.add({
-      "tag": tag,
-      "occurrence": occurrence,
-      "text": textContent,
-    });
-
-    return occurrence;
+    return headerIndex++;
   }
 
   @override
