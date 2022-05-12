@@ -4,22 +4,16 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../component/memo/parts/markdown_builder/header.dart';
 
-class MarkdownBodyHeaderCopiableContainer extends StatefulWidget {
+class MarkdownBodyHeaderCopiableContainer extends StatelessWidget {
   final String content;
   final Function(String) onCopyRequested;
+  final List<dynamic> _headers = [];
 
-  const MarkdownBodyHeaderCopiableContainer({
+  MarkdownBodyHeaderCopiableContainer({
     Key? key,
     required this.content,
     required this.onCopyRequested,
   }) : super(key: key);
-
-  @override
-  _HeadersState createState() => _HeadersState();
-}
-
-class _HeadersState extends State<MarkdownBodyHeaderCopiableContainer> {
-  final List<dynamic> _headers = [];
 
   int add(String tag, String textContent) {
     final occurrence = _headers.where(
@@ -34,16 +28,11 @@ class _HeadersState extends State<MarkdownBodyHeaderCopiableContainer> {
     return occurrence;
   }
 
-  void clear() {
-    _headers.clear();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final content = widget.content;
-    final _onCopyRequested = widget.onCopyRequested;
+    final _onCopyRequested = onCopyRequested;
     return MarkdownBody(
-      data: widget.content,
+      data: content,
       onTapLink: (_, url, __){
         if (url != null) {
           final uri = Uri.parse(url);
