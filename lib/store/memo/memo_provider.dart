@@ -43,6 +43,10 @@ class EditorNotifier extends StateNotifier<MemoState> {
   }
 
   // Action Creators
+  void loadMemoList() {
+    _loadMemoListAndDeletedMemoList();
+  }
+
   void updateTitle(Memo memo, String title) {
     _setMemo(memo.copyWith(
         title: title

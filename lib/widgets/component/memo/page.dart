@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../domain/entities/memo/memo.dart';
 import '../../container/memo/parts/editor.dart';
 import '../../container/memo/parts/preview.dart';
 
@@ -26,7 +25,6 @@ class MemoPage extends StatelessWidget {
 
     void _storeMemo() {
       storeMemo();
-      // FIXME(Niccari): change message on error
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(notifyMemoStored),
         duration: const Duration(seconds: 2),

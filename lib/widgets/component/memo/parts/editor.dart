@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../store/loading_state.dart';
+import '../../parts/loading.dart';
+
 class EditorWidget extends StatelessWidget {
-  final String title;
-  final String content;
+  final String? title;
+  final String? content;
+  final LoadingState loadingState;
   final void Function(String text) onTitleChanged;
   final void Function(String text) onContentChanged;
 
   const EditorWidget({
     required this.title,
     required this.content,
+    required this.loadingState,
     required this.onTitleChanged,
     required this.onContentChanged,
     Key? key
@@ -30,6 +35,9 @@ class EditorWidget extends StatelessWidget {
     );
     const outlineInputBorder = OutlineInputBorder();
 
+    if (loadingState == LoadingState.initial || loadingState == LoadingState.loading) {
+      return const LoadingWidget();
+    }
     return SingleChildScrollView(
       child: Padding(
         padding: externalPaddingInset,

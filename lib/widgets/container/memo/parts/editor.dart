@@ -10,6 +10,7 @@ class EditorWidgetContainer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memo = ref.watch(memoProvider);
+    final loadingState = ref.watch(memoStateProvider).loadingState;
     void _onTitleChanged (String text) {
       final memo = ref.read(memoStateProvider).memo;
       if (memo == null) {
@@ -27,9 +28,9 @@ class EditorWidgetContainer extends ConsumerWidget {
     }
 
     return EditorWidget(
-      key: Key(memo?.id ?? ""),
-      title: memo?.title ?? "読込中...",
-      content: memo?.content ?? "読込中...",
+      title: memo?.title,
+      content: memo?.content,
+      loadingState: loadingState,
       onTitleChanged: _onTitleChanged,
       onContentChanged: _onContentChanged,
     );

@@ -3,15 +3,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:private_markdown_writer/widgets/component/memo_list/parts/card.dart';
 
 import '../../../../domain/entities/memo/memo.dart';
+import '../../../../store/loading_state.dart';
+import '../../parts/loading.dart';
 
 class MemoListWidgets extends StatelessWidget {
   final List<Memo> memoList;
+  final LoadingState loadingState;
   final Function(Memo memo) selectMemo;
   final Function(Memo memo) makeDeleteMemo;
+  final Widget errorWidget;
   const MemoListWidgets({
     required this.memoList,
+    required this.loadingState,
     required this.selectMemo,
     required this.makeDeleteMemo,
+    required this.errorWidget,
     Key? key
   }) : super(key: key);
 
@@ -23,6 +29,11 @@ class MemoListWidgets extends StatelessWidget {
 
     const externalPaddingInset = EdgeInsets.all(8);
 
+    if (loadingState == LoadingState.initial || loadingState == LoadingState.loading) {
+      return const LoadingWidget();
+    } else if (loadingState == LoadingState.failed) {
+      return Center(child: errorWidget);
+    }
     if (memoList.isEmpty) {
       return Padding(
         padding: externalPaddingInset,

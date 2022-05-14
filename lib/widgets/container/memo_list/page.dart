@@ -20,9 +20,15 @@ class MemoListPageContainer extends ConsumerWidget {
       Navigator.pushNamed(context, '/');
     }
 
+    _reloadMemoList() {
+      final loadMemoList = ref.read(memoStateProvider.notifier).loadMemoList;
+      loadMemoList();
+    }
+
     return MemoListPage(
       loadingState: loadingState,
       createMemo: _createMemo,
+      reloadMemo: _reloadMemoList,
     );
   }
 }

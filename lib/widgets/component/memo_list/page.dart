@@ -4,31 +4,34 @@ import 'package:private_markdown_writer/widgets/container/memo_list/parts/delete
 import 'package:private_markdown_writer/widgets/container/memo_list/parts/memo_list.dart';
 
 import '../../../store/loading_state.dart';
+import '../parts/error_text_widget.dart';
 
 class MemoListPage extends StatelessWidget {
   final Function() createMemo;
+  final Function() reloadMemo;
   final LoadingState loadingState;
+
   const MemoListPage({
     required this.loadingState,
     required this.createMemo,
+    required this.reloadMemo,
     Key? key
   }) : super(key: key);
 
     @override
     Widget build(BuildContext context) {
-      final memoListLoading = AppLocalizations.of(context)?.memoListLoading ?? "";
       final memoListFailedToLoad = AppLocalizations.of(context)?.memoListFailedToLoad ?? "";
       final memoListTitle = AppLocalizations.of(context)?.memoListTitle ?? "";
       final memoListTabList = AppLocalizations.of(context)?.memoListTabList ?? "";
       final memoListTabDeletedList = AppLocalizations.of(context)?.memoListTabDeletedList ?? "";
 
-      if (loadingState == LoadingState.initial) {
-        return Text(memoListLoading);
-      } else if (loadingState == LoadingState.loading) {
-        return Text(memoListLoading);
-      } else if (loadingState == LoadingState.failed) {
-        return Text(memoListFailedToLoad);
-      }
+      final errorWidget = ErrorTextWidget(
+        errorText: memoListFailedToLoad,
+        recoverActionText: "再読み込み",
+        onActionPressed: () {
+          reloadMemo();
+        },
+      );
       return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -41,10 +44,14 @@ class MemoListPage extends StatelessWidget {
               ],
             ),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: <Widget>[
-              MemoListWidgetsContainer(),
-              DeletedMemoListWidgetsContainer(),
+              MemoListWidgetsContainer(
+                errorWidget: errorWidget,
+              ),
+              DeletedMemoListWidgetsContainer(
+                errorWidget: errorWidget
+              ),
             ],
           ),
           floatingActionButton: Column(

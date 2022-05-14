@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:private_markdown_writer/store/loading_state.dart';
+import 'package:private_markdown_writer/widgets/component/parts/loading.dart';
 
 import '../../../container/memo/parts/markdown_body.dart';
 
@@ -9,11 +11,13 @@ class PreviewWidget extends StatelessWidget {
   const PreviewWidget({
     required this.title,
     required this.content,
+    required this.loadingState,
     required this.onCopyRequested,
     Key? key
   }) : super(key: key);
   final String? title;
   final String? content;
+  final LoadingState loadingState;
   final Function(String) onCopyRequested;
 
   @override
@@ -37,8 +41,8 @@ class PreviewWidget extends StatelessWidget {
       ));
     }
 
-    if (title == null || content == null) {
-      return Text(memoListLoading);
+    if (loadingState == LoadingState.initial || loadingState == LoadingState.loading) {
+      return const LoadingWidget();
     }
     return SingleChildScrollView(
       child: Padding(

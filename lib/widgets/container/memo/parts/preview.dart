@@ -18,9 +18,11 @@ class PreviewWidgetContainer extends StatelessWidget {
     return Consumer(
         builder: (context, ref, _) {
           final memo = ref.watch(memoProvider);
+          final loadingState = ref.watch(memoStateProvider).loadingState;
           return PreviewWidget(
             title: memo?.title,
             content: memo?.content,
+            loadingState: loadingState,
             onCopyRequested: _onCopyRequested
           );
         }
