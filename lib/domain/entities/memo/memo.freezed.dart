@@ -94,9 +94,9 @@ class _$MemoCopyWithImpl<$Res> implements $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
-  factory _$MemoCopyWith(_Memo value, $Res Function(_Memo) then) =
-      __$MemoCopyWithImpl<$Res>;
+abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
+  factory _$$_MemoCopyWith(_$_Memo value, $Res Function(_$_Memo) then) =
+      __$$_MemoCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -109,13 +109,13 @@ abstract class _$MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
-    implements _$MemoCopyWith<$Res> {
-  __$MemoCopyWithImpl(_Memo _value, $Res Function(_Memo) _then)
-      : super(_value, (v) => _then(v as _Memo));
+class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
+    implements _$$_MemoCopyWith<$Res> {
+  __$$_MemoCopyWithImpl(_$_Memo _value, $Res Function(_$_Memo) _then)
+      : super(_value, (v) => _then(v as _$_Memo));
 
   @override
-  _Memo get _value => super._value as _Memo;
+  _$_Memo get _value => super._value as _$_Memo;
 
   @override
   $Res call({
@@ -127,7 +127,7 @@ class __$MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
     Object? title = freezed,
     Object? content = freezed,
   }) {
-    return _then(_Memo(
+    return _then(_$_Memo(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -196,7 +196,7 @@ class _$_Memo implements _Memo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Memo &&
+            other is _$_Memo &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality()
@@ -222,8 +222,8 @@ class _$_Memo implements _Memo {
 
   @JsonKey(ignore: true)
   @override
-  _$MemoCopyWith<_Memo> get copyWith =>
-      __$MemoCopyWithImpl<_Memo>(this, _$identity);
+  _$$_MemoCopyWith<_$_Memo> get copyWith =>
+      __$$_MemoCopyWithImpl<_$_Memo>(this, _$identity);
 }
 
 abstract class _Memo implements Memo {
@@ -237,20 +237,20 @@ abstract class _Memo implements Memo {
       required final String content}) = _$_Memo;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @override
-  DateTime get lastModifiedAt => throw _privateConstructorUsedError;
+  DateTime get lastModifiedAt;
   @override
-  DateTime get lastOpenedAt => throw _privateConstructorUsedError;
+  DateTime get lastOpenedAt;
   @override
-  DateTime? get willDeleteAt => throw _privateConstructorUsedError;
+  DateTime? get willDeleteAt;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get content => throw _privateConstructorUsedError;
+  String get content;
   @override
   @JsonKey(ignore: true)
-  _$MemoCopyWith<_Memo> get copyWith => throw _privateConstructorUsedError;
+  _$$_MemoCopyWith<_$_Memo> get copyWith => throw _privateConstructorUsedError;
 }

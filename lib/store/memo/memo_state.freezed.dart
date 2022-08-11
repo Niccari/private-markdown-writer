@@ -87,10 +87,10 @@ class _$MemoStateCopyWithImpl<$Res> implements $MemoStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MemoStateCopyWith<$Res> implements $MemoStateCopyWith<$Res> {
-  factory _$MemoStateCopyWith(
-          _MemoState value, $Res Function(_MemoState) then) =
-      __$MemoStateCopyWithImpl<$Res>;
+abstract class _$$_MemoStateCopyWith<$Res> implements $MemoStateCopyWith<$Res> {
+  factory _$$_MemoStateCopyWith(
+          _$_MemoState value, $Res Function(_$_MemoState) then) =
+      __$$_MemoStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {LoadingState loadingState,
@@ -103,13 +103,14 @@ abstract class _$MemoStateCopyWith<$Res> implements $MemoStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$MemoStateCopyWithImpl<$Res> extends _$MemoStateCopyWithImpl<$Res>
-    implements _$MemoStateCopyWith<$Res> {
-  __$MemoStateCopyWithImpl(_MemoState _value, $Res Function(_MemoState) _then)
-      : super(_value, (v) => _then(v as _MemoState));
+class __$$_MemoStateCopyWithImpl<$Res> extends _$MemoStateCopyWithImpl<$Res>
+    implements _$$_MemoStateCopyWith<$Res> {
+  __$$_MemoStateCopyWithImpl(
+      _$_MemoState _value, $Res Function(_$_MemoState) _then)
+      : super(_value, (v) => _then(v as _$_MemoState));
 
   @override
-  _MemoState get _value => super._value as _MemoState;
+  _$_MemoState get _value => super._value as _$_MemoState;
 
   @override
   $Res call({
@@ -118,7 +119,7 @@ class __$MemoStateCopyWithImpl<$Res> extends _$MemoStateCopyWithImpl<$Res>
     Object? memoList = freezed,
     Object? deletedMemoList = freezed,
   }) {
-    return _then(_MemoState(
+    return _then(_$_MemoState(
       loadingState: loadingState == freezed
           ? _value.loadingState
           : loadingState // ignore: cast_nullable_to_non_nullable
@@ -128,11 +129,11 @@ class __$MemoStateCopyWithImpl<$Res> extends _$MemoStateCopyWithImpl<$Res>
           : memo // ignore: cast_nullable_to_non_nullable
               as Memo?,
       memoList: memoList == freezed
-          ? _value.memoList
+          ? _value._memoList
           : memoList // ignore: cast_nullable_to_non_nullable
               as List<Memo>,
       deletedMemoList: deletedMemoList == freezed
-          ? _value.deletedMemoList
+          ? _value._deletedMemoList
           : deletedMemoList // ignore: cast_nullable_to_non_nullable
               as List<Memo>,
     ));
@@ -177,13 +178,13 @@ class _$_MemoState implements _MemoState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _MemoState &&
+            other is _$_MemoState &&
             const DeepCollectionEquality()
                 .equals(other.loadingState, loadingState) &&
             const DeepCollectionEquality().equals(other.memo, memo) &&
-            const DeepCollectionEquality().equals(other.memoList, memoList) &&
+            const DeepCollectionEquality().equals(other._memoList, _memoList) &&
             const DeepCollectionEquality()
-                .equals(other.deletedMemoList, deletedMemoList));
+                .equals(other._deletedMemoList, _deletedMemoList));
   }
 
   @override
@@ -191,13 +192,13 @@ class _$_MemoState implements _MemoState {
       runtimeType,
       const DeepCollectionEquality().hash(loadingState),
       const DeepCollectionEquality().hash(memo),
-      const DeepCollectionEquality().hash(memoList),
-      const DeepCollectionEquality().hash(deletedMemoList));
+      const DeepCollectionEquality().hash(_memoList),
+      const DeepCollectionEquality().hash(_deletedMemoList));
 
   @JsonKey(ignore: true)
   @override
-  _$MemoStateCopyWith<_MemoState> get copyWith =>
-      __$MemoStateCopyWithImpl<_MemoState>(this, _$identity);
+  _$$_MemoStateCopyWith<_$_MemoState> get copyWith =>
+      __$$_MemoStateCopyWithImpl<_$_MemoState>(this, _$identity);
 }
 
 abstract class _MemoState implements MemoState {
@@ -208,15 +209,15 @@ abstract class _MemoState implements MemoState {
       required final List<Memo> deletedMemoList}) = _$_MemoState;
 
   @override
-  LoadingState get loadingState => throw _privateConstructorUsedError;
+  LoadingState get loadingState;
   @override
-  Memo? get memo => throw _privateConstructorUsedError;
+  Memo? get memo;
   @override
-  List<Memo> get memoList => throw _privateConstructorUsedError;
+  List<Memo> get memoList;
   @override
-  List<Memo> get deletedMemoList => throw _privateConstructorUsedError;
+  List<Memo> get deletedMemoList;
   @override
   @JsonKey(ignore: true)
-  _$MemoStateCopyWith<_MemoState> get copyWith =>
+  _$$_MemoStateCopyWith<_$_MemoState> get copyWith =>
       throw _privateConstructorUsedError;
 }
