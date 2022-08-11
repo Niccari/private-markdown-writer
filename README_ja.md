@@ -1,5 +1,7 @@
 [English](README.md)
 
+![Flutter(Web,iOS,Android)](https://img.shields.io/badge/-Flutter(Web,iOS,Android)-027DFD.svg?logo=flutter&style=flat)
+
 # private-markdown-writer
 Web(およびAndroid/iOS等)上で動作するMarkdownメモアプリです。
 

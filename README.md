@@ -1,5 +1,7 @@
 [Japanese](README_ja.md)
 
+![Flutter(Web,iOS,Android)](https://img.shields.io/badge/-Flutter(Web,iOS,Android)-027DFD.svg?logo=flutter&style=flat)
+
 # private-markdown-writer
 An private markdown writer running on web(maybe android, ios if signed them).
 
