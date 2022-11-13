@@ -31,7 +31,8 @@ mixin _$Memo {
 /// @nodoc
 abstract class $MemoCopyWith<$Res> {
   factory $MemoCopyWith(Memo value, $Res Function(Memo) then) =
-      _$MemoCopyWithImpl<$Res>;
+      _$MemoCopyWithImpl<$Res, Memo>;
+  @useResult
   $Res call(
       {String id,
       DateTime createdAt,
@@ -43,53 +44,56 @@ abstract class $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MemoCopyWithImpl<$Res> implements $MemoCopyWith<$Res> {
+class _$MemoCopyWithImpl<$Res, $Val extends Memo>
+    implements $MemoCopyWith<$Res> {
   _$MemoCopyWithImpl(this._value, this._then);
 
-  final Memo _value;
   // ignore: unused_field
-  final $Res Function(Memo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? lastModifiedAt = freezed,
-    Object? lastOpenedAt = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? lastModifiedAt = null,
+    Object? lastOpenedAt = null,
     Object? willDeleteAt = freezed,
-    Object? title = freezed,
-    Object? content = freezed,
+    Object? title = null,
+    Object? content = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      lastModifiedAt: lastModifiedAt == freezed
+      lastModifiedAt: null == lastModifiedAt
           ? _value.lastModifiedAt
           : lastModifiedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      lastOpenedAt: lastOpenedAt == freezed
+      lastOpenedAt: null == lastOpenedAt
           ? _value.lastOpenedAt
           : lastOpenedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      willDeleteAt: willDeleteAt == freezed
+      willDeleteAt: freezed == willDeleteAt
           ? _value.willDeleteAt
           : willDeleteAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -98,6 +102,7 @@ abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
   factory _$$_MemoCopyWith(_$_Memo value, $Res Function(_$_Memo) then) =
       __$$_MemoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       DateTime createdAt,
@@ -109,50 +114,48 @@ abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
+class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
     implements _$$_MemoCopyWith<$Res> {
   __$$_MemoCopyWithImpl(_$_Memo _value, $Res Function(_$_Memo) _then)
-      : super(_value, (v) => _then(v as _$_Memo));
+      : super(_value, _then);
 
-  @override
-  _$_Memo get _value => super._value as _$_Memo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? lastModifiedAt = freezed,
-    Object? lastOpenedAt = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? lastModifiedAt = null,
+    Object? lastOpenedAt = null,
     Object? willDeleteAt = freezed,
-    Object? title = freezed,
-    Object? content = freezed,
+    Object? title = null,
+    Object? content = null,
   }) {
     return _then(_$_Memo(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      lastModifiedAt: lastModifiedAt == freezed
+      lastModifiedAt: null == lastModifiedAt
           ? _value.lastModifiedAt
           : lastModifiedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      lastOpenedAt: lastOpenedAt == freezed
+      lastOpenedAt: null == lastOpenedAt
           ? _value.lastOpenedAt
           : lastOpenedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      willDeleteAt: willDeleteAt == freezed
+      willDeleteAt: freezed == willDeleteAt
           ? _value.willDeleteAt
           : willDeleteAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
@@ -197,31 +200,26 @@ class _$_Memo implements _Memo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Memo &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality()
-                .equals(other.lastModifiedAt, lastModifiedAt) &&
-            const DeepCollectionEquality()
-                .equals(other.lastOpenedAt, lastOpenedAt) &&
-            const DeepCollectionEquality()
-                .equals(other.willDeleteAt, willDeleteAt) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.content, content));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.lastModifiedAt, lastModifiedAt) ||
+                other.lastModifiedAt == lastModifiedAt) &&
+            (identical(other.lastOpenedAt, lastOpenedAt) ||
+                other.lastOpenedAt == lastOpenedAt) &&
+            (identical(other.willDeleteAt, willDeleteAt) ||
+                other.willDeleteAt == willDeleteAt) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.content, content) || other.content == content));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(lastModifiedAt),
-      const DeepCollectionEquality().hash(lastOpenedAt),
-      const DeepCollectionEquality().hash(willDeleteAt),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(content));
+  int get hashCode => Object.hash(runtimeType, id, createdAt, lastModifiedAt,
+      lastOpenedAt, willDeleteAt, title, content);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MemoCopyWith<_$_Memo> get copyWith =>
       __$$_MemoCopyWithImpl<_$_Memo>(this, _$identity);
 }

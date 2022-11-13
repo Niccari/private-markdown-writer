@@ -29,7 +29,8 @@ mixin _$MemoState {
 /// @nodoc
 abstract class $MemoStateCopyWith<$Res> {
   factory $MemoStateCopyWith(MemoState value, $Res Function(MemoState) then) =
-      _$MemoStateCopyWithImpl<$Res>;
+      _$MemoStateCopyWithImpl<$Res, MemoState>;
+  @useResult
   $Res call(
       {LoadingState loadingState,
       Memo? memo,
@@ -40,48 +41,52 @@ abstract class $MemoStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MemoStateCopyWithImpl<$Res> implements $MemoStateCopyWith<$Res> {
+class _$MemoStateCopyWithImpl<$Res, $Val extends MemoState>
+    implements $MemoStateCopyWith<$Res> {
   _$MemoStateCopyWithImpl(this._value, this._then);
 
-  final MemoState _value;
   // ignore: unused_field
-  final $Res Function(MemoState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loadingState = freezed,
+    Object? loadingState = null,
     Object? memo = freezed,
-    Object? memoList = freezed,
-    Object? deletedMemoList = freezed,
+    Object? memoList = null,
+    Object? deletedMemoList = null,
   }) {
     return _then(_value.copyWith(
-      loadingState: loadingState == freezed
+      loadingState: null == loadingState
           ? _value.loadingState
           : loadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
-      memo: memo == freezed
+      memo: freezed == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as Memo?,
-      memoList: memoList == freezed
+      memoList: null == memoList
           ? _value.memoList
           : memoList // ignore: cast_nullable_to_non_nullable
               as List<Memo>,
-      deletedMemoList: deletedMemoList == freezed
+      deletedMemoList: null == deletedMemoList
           ? _value.deletedMemoList
           : deletedMemoList // ignore: cast_nullable_to_non_nullable
               as List<Memo>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MemoCopyWith<$Res>? get memo {
     if (_value.memo == null) {
       return null;
     }
 
     return $MemoCopyWith<$Res>(_value.memo!, (value) {
-      return _then(_value.copyWith(memo: value));
+      return _then(_value.copyWith(memo: value) as $Val);
     });
   }
 }
@@ -92,6 +97,7 @@ abstract class _$$_MemoStateCopyWith<$Res> implements $MemoStateCopyWith<$Res> {
           _$_MemoState value, $Res Function(_$_MemoState) then) =
       __$$_MemoStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {LoadingState loadingState,
       Memo? memo,
@@ -103,36 +109,35 @@ abstract class _$$_MemoStateCopyWith<$Res> implements $MemoStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MemoStateCopyWithImpl<$Res> extends _$MemoStateCopyWithImpl<$Res>
+class __$$_MemoStateCopyWithImpl<$Res>
+    extends _$MemoStateCopyWithImpl<$Res, _$_MemoState>
     implements _$$_MemoStateCopyWith<$Res> {
   __$$_MemoStateCopyWithImpl(
       _$_MemoState _value, $Res Function(_$_MemoState) _then)
-      : super(_value, (v) => _then(v as _$_MemoState));
+      : super(_value, _then);
 
-  @override
-  _$_MemoState get _value => super._value as _$_MemoState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loadingState = freezed,
+    Object? loadingState = null,
     Object? memo = freezed,
-    Object? memoList = freezed,
-    Object? deletedMemoList = freezed,
+    Object? memoList = null,
+    Object? deletedMemoList = null,
   }) {
     return _then(_$_MemoState(
-      loadingState: loadingState == freezed
+      loadingState: null == loadingState
           ? _value.loadingState
           : loadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
-      memo: memo == freezed
+      memo: freezed == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as Memo?,
-      memoList: memoList == freezed
+      memoList: null == memoList
           ? _value._memoList
           : memoList // ignore: cast_nullable_to_non_nullable
               as List<Memo>,
-      deletedMemoList: deletedMemoList == freezed
+      deletedMemoList: null == deletedMemoList
           ? _value._deletedMemoList
           : deletedMemoList // ignore: cast_nullable_to_non_nullable
               as List<Memo>,
@@ -179,9 +184,9 @@ class _$_MemoState implements _MemoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MemoState &&
-            const DeepCollectionEquality()
-                .equals(other.loadingState, loadingState) &&
-            const DeepCollectionEquality().equals(other.memo, memo) &&
+            (identical(other.loadingState, loadingState) ||
+                other.loadingState == loadingState) &&
+            (identical(other.memo, memo) || other.memo == memo) &&
             const DeepCollectionEquality().equals(other._memoList, _memoList) &&
             const DeepCollectionEquality()
                 .equals(other._deletedMemoList, _deletedMemoList));
@@ -190,13 +195,14 @@ class _$_MemoState implements _MemoState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(loadingState),
-      const DeepCollectionEquality().hash(memo),
+      loadingState,
+      memo,
       const DeepCollectionEquality().hash(_memoList),
       const DeepCollectionEquality().hash(_deletedMemoList));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MemoStateCopyWith<_$_MemoState> get copyWith =>
       __$$_MemoStateCopyWithImpl<_$_MemoState>(this, _$identity);
 }
