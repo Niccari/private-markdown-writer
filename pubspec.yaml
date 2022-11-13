@@ -3,7 +3,7 @@ description: An private markdown writer running on web, (and maybe android, ios)
 
 publish_to: 'none'
 
-version: 0.1.1
+version: 0.1.2
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
